@@ -11,6 +11,11 @@ std::unique_ptr<BST::Node> BST::createNode(int _data)
 	return node;
 }
 
+bool BST::isNotEmpty()
+{
+	return (root) ? true: false;
+}
+
 void BST::insertNode(int _data, std::unique_ptr<Node>& currentNode)
 {
 	if (!currentNode)
@@ -60,7 +65,7 @@ int BST::findMax(std::unique_ptr<Node>& currentNode)
 		return currentNode->data;
 }
 
-bool BST::searchPrivate(std::unique_ptr<Node>& currentNode, int _data)
+bool BST::findPrivate(std::unique_ptr<Node>& currentNode, int _data)
 {
 	if (!currentNode)
 		return false;
@@ -69,11 +74,16 @@ bool BST::searchPrivate(std::unique_ptr<Node>& currentNode, int _data)
 		return true;
 
 	else if (_data < currentNode->data)
-		return searchPrivate(currentNode->leftChild, _data);
+		return findPrivate(currentNode->leftChild, _data);
 
 	else
-		return searchPrivate(currentNode->rightChild, _data);
+		return findPrivate(currentNode->rightChild, _data);
 
+}
+
+void BST::deletePrivate(std::unique_ptr<Node>& currentNode, int _data)
+{
+	std::cout << "deleted" << std::endl;
 }
 
 void BST::print(std::unique_ptr<Node>& currentNode)
@@ -113,9 +123,26 @@ int BST::findMaximum()
 	return findMax(root);
 }
 
-bool BST::search(int _data)
+bool BST::findNode(int _data)
 {
-	return searchPrivate(root, _data);
+	if (isNotEmpty())
+		return findPrivate(root, _data);
+	else {
+		std::cout << "Tree is empty" << std::endl;
+		return false;
+	}
+}
+
+void BST::deleteNode(int _data)
+{
+	if (findNode(_data))
+	{
+		deletePrivate(root, _data);
+	}
+	else
+	{
+		std::cout << _data << " is not in the tree so it cannot be deleted" << std::endl;
+	}
 }
 
 void BST::printInOrder()

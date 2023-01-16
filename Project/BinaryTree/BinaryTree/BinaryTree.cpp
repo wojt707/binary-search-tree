@@ -6,7 +6,13 @@
 int main()
 {
 	BST tree;
+	std::cout << tree.findNode(1) << std::endl;
 	tree.insert(10);
+	std::cout << tree.findNode(1) << std::endl;
+	std::cout << tree.findNode(10) << std::endl;
+	tree.deleteNode(7);
+	tree.deleteNode(10);
+	return 0;
 	tree.insert(13);
 	std::cout << "Maximum value is:	" << tree.findMaximum() << std::endl;
 	tree.insert(2);
@@ -22,7 +28,7 @@ int main()
 	int a;
 	while (std::cin >> a)
 	{
-		std::cout << "Searching for " << a << ": " << tree.search(a) << std::endl;
+		std::cout << "Searching for " << a << ": " << tree.findNode(a) << std::endl;
 	}
 	 
 

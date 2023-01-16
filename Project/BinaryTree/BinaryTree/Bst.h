@@ -16,10 +16,12 @@ private:
 	std::unique_ptr<Node> root;
 
 	std::unique_ptr<Node> createNode(int _data);
+	bool isNotEmpty();
 	void insertNode(int _data, std::unique_ptr<Node>& currentNode);
 	int findMin(std::unique_ptr<Node>& currentNode);
 	int findMax(std::unique_ptr<Node>& currentNode);
-	bool searchPrivate(std::unique_ptr<Node>& currentNode, int _data);
+	bool findPrivate(std::unique_ptr<Node>& currentNode, int _data);
+	void deletePrivate(std::unique_ptr<Node>& currentNode, int _data);
 	void print(std::unique_ptr<Node>& currentNode);
 
 
@@ -29,7 +31,8 @@ public:
 	void insert(int _data);
 	int findMinimum();
 	int findMaximum();
-	bool search(int _data);
+	bool findNode(int _data);
+	void deleteNode(int _data);
 	void printInOrder();
 };
 
