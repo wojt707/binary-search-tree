@@ -22,6 +22,7 @@ private:
 	int findMax(std::unique_ptr<Node>& currentNode);
 	bool findPrivate(std::unique_ptr<Node>& currentNode, int _data);
 	void deletePrivate(std::unique_ptr<Node>& currentNode, int _data);
+	void erasePrivate(std::unique_ptr<Node>& currentNode);
 	void print(std::unique_ptr<Node>& currentNode);
 
 
@@ -33,6 +34,7 @@ public:
 	int findMaximum();
 	bool findNode(int _data);
 	void deleteNode(int _data);
+	void erase();
 	void printInOrder();
 };
 

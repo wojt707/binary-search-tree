@@ -30,6 +30,8 @@ int main()
 	tree.insert(19);
 	tree.deleteNode(3);
 	tree.deleteNode(12);
+	tree.erase();
+	tree.insert(15);
 	
 	
 	/*

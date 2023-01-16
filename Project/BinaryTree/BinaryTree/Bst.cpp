@@ -113,6 +113,16 @@ void BST::deletePrivate(std::unique_ptr<Node>& currentNode, int _data)
 	}
 }
 
+void BST::erasePrivate(std::unique_ptr<Node>& currentNode)
+{
+	if (currentNode)
+	{
+		erasePrivate(currentNode->leftChild);
+		erasePrivate(currentNode->rightChild);
+		currentNode.reset();
+	}
+}
+
 void BST::print(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
@@ -173,6 +183,12 @@ void BST::deleteNode(int _data)
 		std::cout << _data << " is not in the tree so it cannot be deleted" << std::endl;
 	}
 	printInOrder();
+}
+
+void BST::erase()
+{
+	erasePrivate(root);
+	std::cout << "Succesfully erased whole tree" << std::endl;
 }
 
 void BST::printInOrder()
