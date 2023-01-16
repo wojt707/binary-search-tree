@@ -60,6 +60,22 @@ int BST::findMax(std::unique_ptr<Node>& currentNode)
 		return currentNode->data;
 }
 
+bool BST::searchPrivate(std::unique_ptr<Node>& currentNode, int _data)
+{
+	if (!currentNode)
+		return false;
+
+	if (_data == currentNode->data)
+		return true;
+
+	else if (_data < currentNode->data)
+		return searchPrivate(currentNode->leftChild, _data);
+
+	else
+		return searchPrivate(currentNode->rightChild, _data);
+
+}
+
 void BST::print(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
@@ -87,19 +103,23 @@ void BST::insert(int _data)
 	insertNode(_data, root);
 }
 
-void BST::printInOrder()
-{
-	print(root);
-	std::cout << std::endl;
-}
-
 int BST::findMinimum()
 {
-	//std::cout << "Min is: " << findMin(root) << std::endl;
 	return findMin(root);
 }
 
 int BST::findMaximum()
 {
 	return findMax(root);
+}
+
+bool BST::search(int _data)
+{
+	return searchPrivate(root, _data);
+}
+
+void BST::printInOrder()
+{
+	print(root);
+	std::cout << std::endl;
 }

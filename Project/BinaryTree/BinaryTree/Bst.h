@@ -19,6 +19,7 @@ private:
 	void insertNode(int _data, std::unique_ptr<Node>& currentNode);
 	int findMin(std::unique_ptr<Node>& currentNode);
 	int findMax(std::unique_ptr<Node>& currentNode);
+	bool searchPrivate(std::unique_ptr<Node>& currentNode, int _data);
 	void print(std::unique_ptr<Node>& currentNode);
 
 
@@ -26,9 +27,10 @@ public:
 	BST();
 	~BST();
 	void insert(int _data);
-	void printInOrder();
 	int findMinimum();
 	int findMaximum();
+	bool search(int _data);
+	void printInOrder();
 };
 
 #endif 

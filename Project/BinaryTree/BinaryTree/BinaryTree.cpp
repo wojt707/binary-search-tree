@@ -19,7 +19,12 @@ int main()
 	tree.insert(6);
 	std::cout << std::endl;
 	tree.printInOrder();
-	
+	int a;
+	while (std::cin >> a)
+	{
+		std::cout << "Searching for " << a << ": " << tree.search(a) << std::endl;
+	}
+	 
 
 	return 0;
 }
