@@ -34,6 +34,32 @@ void BST::insertNode(int _data, std::unique_ptr<Node>& currentNode)
 
 }
 
+int BST::findMin(std::unique_ptr<Node>& currentNode)
+{
+	if (!currentNode)
+	{
+		std::cout << "Error: BST is empty";
+		std::exit(1);
+	}
+	if (currentNode->leftChild)
+		findMin(currentNode->leftChild);
+	else
+		return currentNode->data;
+}
+
+int BST::findMax(std::unique_ptr<Node>& currentNode)
+{
+	if (!currentNode)
+	{
+		std::cout << "Error: BST is empty";
+		std::exit(1);
+	}
+	if (currentNode->rightChild)
+		findMax(currentNode->rightChild);
+	else
+		return currentNode->data;
+}
+
 void BST::print(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
@@ -65,4 +91,15 @@ void BST::printInOrder()
 {
 	print(root);
 	std::cout << std::endl;
+}
+
+int BST::findMinimum()
+{
+	//std::cout << "Min is: " << findMin(root) << std::endl;
+	return findMin(root);
+}
+
+int BST::findMaximum()
+{
+	return findMax(root);
 }
