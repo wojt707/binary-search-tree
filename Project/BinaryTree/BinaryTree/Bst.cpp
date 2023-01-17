@@ -2,13 +2,17 @@
 #include "Bst.h"
 
 template<typename T>
+BST<T>::Node::Node(T _data) {
+	data = _data;
+	leftChild = nullptr;
+	rightChild = nullptr;
+}
+
+template<typename T>
 std::unique_ptr<typename BST<T>::Node> BST<T>::createNode(T _data)
 {
-	std::unique_ptr<Node> node = std::make_unique<Node>();
-	node->data = _data;
-	node->leftChild = nullptr;
-	node->rightChild = nullptr;
-	std::cout << "Node " << node->data << " succesfuly inserted" << std::endl;
+	std::unique_ptr<Node> node = std::make_unique<Node>(_data);
+	std::cout << "Node " << node->data << " succesfuly created" << std::endl;
 	return node;
 }
 
@@ -21,8 +25,7 @@ std::unique_ptr<typename BST<T>::Node> BST<T>::copyHelper(const std::unique_ptr<
 	}
 	else
 	{
-		std::unique_ptr<Node> newNode = std::make_unique<Node>();
-		newNode->data = other->data;
+		std::unique_ptr<Node> newNode = std::make_unique<Node>(other->data);
 		std::cout << "Copied node " << newNode->data << std::endl;
 		newNode->leftChild = copyHelper(other->leftChild);
 		newNode->rightChild = copyHelper(other->rightChild);

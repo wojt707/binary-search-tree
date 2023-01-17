@@ -13,6 +13,8 @@ private:
 		T data;
 		std::unique_ptr<Node> leftChild;
 		std::unique_ptr<Node> rightChild;
+
+		Node(T _data);
 	};
 	std::unique_ptr<Node> root;
 
