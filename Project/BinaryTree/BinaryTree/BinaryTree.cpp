@@ -5,7 +5,7 @@
 
 int main()
 {
-	BST tree;
+	BST<int> tree;
 	tree.printInOrder();
 	std::cout << tree.findNode(1) << std::endl;
 	tree.insert(10);
@@ -33,6 +33,8 @@ int main()
 	tree.erase();
 	tree.insert(15);
 	
+	BST<double> doubleBST;
+	doubleBST.insert(23.5);
 	
 	/*
 	int a;

@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Bst.h"
 
-std::unique_ptr<BST::Node> BST::createNode(int _data)
+template<typename T>
+std::unique_ptr<typename BST<T>::Node> BST<T>::createNode(T _data)
 {
 	std::unique_ptr<Node> node = std::make_unique<Node>();
 	node->data = _data;
@@ -11,12 +12,14 @@ std::unique_ptr<BST::Node> BST::createNode(int _data)
 	return node;
 }
 
-bool BST::isNotEmpty()
+template<typename T>
+bool BST<T>::isNotEmpty()
 {
-	return (root) ? true: false;
+	return (root) ? true : false;
 }
 
-void BST::insertNode(int _data, std::unique_ptr<Node>& currentNode)
+template<typename T>
+void BST<T>::insertNode(T _data, std::unique_ptr<Node>& currentNode)
 {
 	if (!currentNode)
 	{
@@ -39,7 +42,8 @@ void BST::insertNode(int _data, std::unique_ptr<Node>& currentNode)
 
 }
 
-int BST::findMin(std::unique_ptr<Node>& currentNode)
+template<typename T>
+T BST<T>::findMin(std::unique_ptr<Node>& currentNode)
 {
 	if (!currentNode)
 	{
@@ -52,11 +56,12 @@ int BST::findMin(std::unique_ptr<Node>& currentNode)
 		return currentNode->data;
 }
 
-int BST::findMax(std::unique_ptr<Node>& currentNode)
+template<typename T>
+T BST<T>::findMax(std::unique_ptr<Node>& currentNode)
 {
 	if (!currentNode)
 	{
-		std::cout << "Error: BST is empty";
+		std::cout << "Error: BST<T> is empty";
 		std::exit(1);
 	}
 	if (currentNode->rightChild)
@@ -65,13 +70,14 @@ int BST::findMax(std::unique_ptr<Node>& currentNode)
 		return currentNode->data;
 }
 
-bool BST::findPrivate(std::unique_ptr<Node>& currentNode, int _data)
+template<typename T>
+bool BST<T>::findPrivate(std::unique_ptr<Node>& currentNode, T _data)
 {
 	if (!currentNode) {
 		std::cout << "Node " << _data << " not found" << std::endl;
 		return false;
 
-}
+	}
 	if (_data < currentNode->data)
 		return findPrivate(currentNode->leftChild, _data);
 
@@ -81,12 +87,13 @@ bool BST::findPrivate(std::unique_ptr<Node>& currentNode, int _data)
 	else {
 		std::cout << "Node " << _data << " succesfully found" << std::endl;
 		return true;
-		}
-		
+	}
+
 
 }
 
-void BST::deletePrivate(std::unique_ptr<Node>& currentNode, int _data)
+template<typename T>
+void BST<T>::deletePrivate(std::unique_ptr<Node>& currentNode, T _data)
 {
 	if (_data < currentNode->data)
 		deletePrivate(currentNode->leftChild, _data);
@@ -106,14 +113,15 @@ void BST::deletePrivate(std::unique_ptr<Node>& currentNode, int _data)
 
 		else
 		{
-			int successor = findMin(currentNode->rightChild);
+			T successor = findMin(currentNode->rightChild);
 			currentNode->data = successor;
 			deletePrivate(currentNode->rightChild, successor);
 		}
 	}
 }
 
-void BST::erasePrivate(std::unique_ptr<Node>& currentNode)
+template<typename T>
+void BST<T>::erasePrivate(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
 	{
@@ -123,7 +131,8 @@ void BST::erasePrivate(std::unique_ptr<Node>& currentNode)
 	}
 }
 
-void BST::print(std::unique_ptr<Node>& currentNode)
+template<typename T>
+void BST<T>::print(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
 	{
@@ -133,35 +142,41 @@ void BST::print(std::unique_ptr<Node>& currentNode)
 	}
 }
 
-BST::BST()
+template<typename T>
+BST<T>::BST()
 {
 	this->root = nullptr;
 	std::cout << "Created Binary search tree" << std::endl;
 }
 
-BST::~BST()
+template<typename T>
+BST<T>::~BST()
 {
 	std::cout << "Deleted Binary search tree" << std::endl;
 }
 
-void BST::insert(int _data)
+template<typename T>
+void BST<T>::insert(T _data)
 {
 	std::cout << "Trying to insert node " << _data << std::endl;
 	insertNode(_data, root);
 	printInOrder();
 }
 
-int BST::findMinimum()
+template<typename T>
+T BST<T>::findMinimum()
 {
 	return findMin(root);
 }
 
-int BST::findMaximum()
+template<typename T>
+T BST<T>::findMaximum()
 {
 	return findMax(root);
 }
 
-bool BST::findNode(int _data)
+template<typename T>
+bool BST<T>::findNode(T _data)
 {
 	if (isNotEmpty())
 		return findPrivate(root, _data);
@@ -171,7 +186,8 @@ bool BST::findNode(int _data)
 	}
 }
 
-void BST::deleteNode(int _data)
+template<typename T>
+void BST<T>::deleteNode(T _data)
 {
 	if (findNode(_data))
 	{
@@ -185,13 +201,15 @@ void BST::deleteNode(int _data)
 	printInOrder();
 }
 
-void BST::erase()
+template<typename T>
+void BST<T>::erase()
 {
 	erasePrivate(root);
 	std::cout << "Succesfully erased whole tree" << std::endl;
 }
 
-void BST::printInOrder()
+template<typename T>
+void BST<T>::printInOrder()
 {
 	if (isNotEmpty())
 	{
@@ -204,3 +222,10 @@ void BST::printInOrder()
 		std::cout << "Tree is empty" << std::endl;
 	}
 }
+
+template class BST<int>;
+template class BST<float>;
+template class BST<double>;
+template class BST<std::string>;
+template class BST<char>;
+template class BST<bool>;
