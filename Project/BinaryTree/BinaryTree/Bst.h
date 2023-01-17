@@ -24,7 +24,9 @@ private:
 	bool findPrivate(std::unique_ptr<Node>& currentNode, T _data);
 	void deletePrivate(std::unique_ptr<Node>& currentNode, T _data);
 	void erasePrivate(std::unique_ptr<Node>& currentNode);
-	void print(std::unique_ptr<Node>& currentNode);
+	void inOrder(std::unique_ptr<Node>& currentNode);
+	void preOrder(std::unique_ptr<Node>& currentNode);
+	void postOrder(std::unique_ptr<Node>& currentNode);
 
 
 public:
@@ -37,6 +39,8 @@ public:
 	void deleteNode(T _data);
 	void erase();
 	void printInOrder();
+	void printPreOrder();
+	void printPostOrder();
 };
 
 #endif 

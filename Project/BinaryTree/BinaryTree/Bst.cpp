@@ -132,13 +132,35 @@ void BST<T>::erasePrivate(std::unique_ptr<Node>& currentNode)
 }
 
 template<typename T>
-void BST<T>::print(std::unique_ptr<Node>& currentNode)
+void BST<T>::inOrder(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
 	{
-		print(currentNode->leftChild);
+		inOrder(currentNode->leftChild);
 		std::cout << currentNode->data << ' ';
-		print(currentNode->rightChild);
+		inOrder(currentNode->rightChild);
+	}
+}
+
+template<typename T>
+void BST<T>::preOrder(std::unique_ptr<Node>& currentNode)
+{
+	if (currentNode)
+	{
+		std::cout << currentNode->data << ' ';
+		preOrder(currentNode->leftChild);
+		preOrder(currentNode->rightChild);
+	}
+}
+
+template<typename T>
+void BST<T>::postOrder(std::unique_ptr<Node>& currentNode)
+{
+	if (currentNode)
+	{
+		postOrder(currentNode->leftChild);
+		postOrder(currentNode->rightChild);
+		std::cout << currentNode->data << ' ';
 	}
 }
 
@@ -160,7 +182,7 @@ void BST<T>::insert(T _data)
 {
 	std::cout << "Trying to insert node " << _data << std::endl;
 	insertNode(_data, root);
-	printInOrder();
+	//printInOrder();
 }
 
 template<typename T>
@@ -213,8 +235,38 @@ void BST<T>::printInOrder()
 {
 	if (isNotEmpty())
 	{
-		std::cout << "All nodes: ";
-		print(root);
+		std::cout << "In-order traversal: ";
+		inOrder(root);
+		std::cout << std::endl;
+
+	}
+	else {
+		std::cout << "Tree is empty" << std::endl;
+	}
+}
+
+template<typename T>
+void BST<T>::printPreOrder()
+{
+	if (isNotEmpty())
+	{
+		std::cout << "Pre-order traversal: ";
+		preOrder(root);
+		std::cout << std::endl;
+
+	}
+	else {
+		std::cout << "Tree is empty" << std::endl;
+	}
+}
+
+template<typename T>
+void BST<T>::printPostOrder()
+{
+	if (isNotEmpty())
+	{
+		std::cout << "Post-order traversal: ";
+		postOrder(root);
 		std::cout << std::endl;
 
 	}

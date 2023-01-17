@@ -6,43 +6,29 @@
 int main()
 {
 	BST<int> tree;
-	tree.printInOrder();
-	std::cout << tree.findNode(1) << std::endl;
-	tree.insert(10);
-	std::cout << tree.findNode(1) << std::endl;
-	std::cout << tree.findNode(10) << std::endl;
-	tree.deleteNode(7);
-	tree.deleteNode(10);
-	tree.insert(3);
-	std::cout << "Maximum value is:	" << tree.findMaximum() << std::endl;
-	tree.insert(2);
-	tree.insert(5);
-	tree.insert(7);
-	tree.insert(12);
-	std::cout << "Maximum value is:	" << tree.findMaximum() << std::endl;
-	tree.insert(-1);
-	tree.insert(10);
-	tree.insert(6);
-	tree.deleteNode(0);
-	tree.deleteNode(7);
-	tree.deleteNode(0);
-	tree.insert(12);
-	tree.insert(19);
-	tree.deleteNode(3);
-	tree.deleteNode(12);
-	tree.erase();
+	tree.insert(25);
 	tree.insert(15);
-	
+	tree.insert(50);
+	tree.insert(10);
+	tree.insert(22);
+	tree.insert(35);
+	tree.insert(70);
+	tree.insert(4);
+	tree.insert(12);
+	tree.insert(18);
+	tree.insert(24);
+	tree.insert(31);
+	tree.insert(44);
+	tree.insert(66);
+	tree.insert(90);
+	tree.printInOrder();
+	tree.printPreOrder();
+	tree.printPostOrder();
+
+
 	BST<double> doubleBST;
 	doubleBST.insert(23.5);
 	
-	/*
-	int a;
-	while (std::cin >> a)
-	{
-		std::cout << "Searching for " << a << ": " << tree.findNode(a) << std::endl;
-	}*/
-	 
 
 	return 0;
 }
