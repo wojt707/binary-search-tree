@@ -13,6 +13,24 @@ std::unique_ptr<typename BST<T>::Node> BST<T>::createNode(T _data)
 }
 
 template<typename T>
+std::unique_ptr<typename BST<T>::Node> BST<T>::copyHelper(const std::unique_ptr<Node>& other)
+{
+	if (!other)
+	{
+		return nullptr;
+	}
+	else
+	{
+		std::unique_ptr<Node> newNode = std::make_unique<Node>();
+		newNode->data = other->data;
+		std::cout << "Copied node " << newNode->data << std::endl;
+		newNode->leftChild = copyHelper(other->leftChild);
+		newNode->rightChild = copyHelper(other->rightChild);
+		return newNode;
+	}
+}
+
+template<typename T>
 bool BST<T>::isNotEmpty()
 {
 	return (root) ? true : false;
@@ -132,7 +150,7 @@ void BST<T>::erasePrivate(std::unique_ptr<Node>& currentNode)
 }
 
 template<typename T>
-void BST<T>::inOrder(std::unique_ptr<Node>& currentNode)
+void BST<T>::inOrder(const std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
 	{
@@ -143,7 +161,7 @@ void BST<T>::inOrder(std::unique_ptr<Node>& currentNode)
 }
 
 template<typename T>
-void BST<T>::preOrder(std::unique_ptr<Node>& currentNode)
+void BST<T>::preOrder(const std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
 	{
@@ -154,7 +172,7 @@ void BST<T>::preOrder(std::unique_ptr<Node>& currentNode)
 }
 
 template<typename T>
-void BST<T>::postOrder(std::unique_ptr<Node>& currentNode)
+void BST<T>::postOrder(const std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode)
 	{
@@ -169,6 +187,14 @@ BST<T>::BST()
 {
 	this->root = nullptr;
 	std::cout << "Created Binary search tree" << std::endl;
+}
+
+template<typename T>
+BST<T>::BST(const BST<T>& other)
+{
+	this->root = copyHelper(other.root);
+
+	std::cout << "Copy created" << std::endl;
 }
 
 template<typename T>
@@ -220,7 +246,6 @@ void BST<T>::deleteNode(T _data)
 	{
 		std::cout << _data << " is not in the tree so it cannot be deleted" << std::endl;
 	}
-	printInOrder();
 }
 
 template<typename T>

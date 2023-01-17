@@ -21,13 +21,25 @@ int main()
 	tree.insert(44);
 	tree.insert(66);
 	tree.insert(90);
+
+	BST<int> secondTree = tree;
+
 	tree.printInOrder();
-	tree.printPreOrder();
-	tree.printPostOrder();
+	secondTree.printInOrder();
 
+	tree.deleteNode(22);
 
-	BST<double> doubleBST;
-	doubleBST.insert(23.5);
+	tree.printInOrder();
+	secondTree.printInOrder();
+
+	secondTree.deleteNode(10);
+	secondTree.insert(7);
+
+	tree.printInOrder();
+	secondTree.printInOrder();
+
+	//BST<double> doubleBST;
+	//doubleBST.insert(23.5);
 	
 
 	return 0;

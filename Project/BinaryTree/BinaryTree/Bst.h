@@ -17,6 +17,7 @@ private:
 	std::unique_ptr<Node> root;
 
 	std::unique_ptr<Node> createNode(T _data);
+	std::unique_ptr<Node> copyHelper(const std::unique_ptr<Node>& other);
 	bool isNotEmpty();
 	void insertNode(T _data, std::unique_ptr<Node>& currentNode);
 	T findMin(std::unique_ptr<Node>& currentNode);
@@ -24,13 +25,15 @@ private:
 	bool findPrivate(std::unique_ptr<Node>& currentNode, T _data);
 	void deletePrivate(std::unique_ptr<Node>& currentNode, T _data);
 	void erasePrivate(std::unique_ptr<Node>& currentNode);
-	void inOrder(std::unique_ptr<Node>& currentNode);
-	void preOrder(std::unique_ptr<Node>& currentNode);
-	void postOrder(std::unique_ptr<Node>& currentNode);
+	void inOrder(const std::unique_ptr<Node>& currentNode);
+	void preOrder(const std::unique_ptr<Node>& currentNode);
+	void postOrder(const std::unique_ptr<Node>& currentNode);
 
 
 public:
 	BST();
+	// copy constructor
+	BST(const BST<T>& other);
 	~BST();
 	void insert(T _data);
 	T findMinimum();
