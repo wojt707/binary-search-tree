@@ -197,7 +197,16 @@ BST<T>::BST(const BST<T>& other)
 {
 	this->root = copyHelper(other.root);
 
-	std::cout << "Copy created" << std::endl;
+	std::cout << "Copied BST" << std::endl;
+}
+
+template<typename T>
+BST<T>::BST(BST<T>&& other)
+{
+	this->root = std::move(other.root);
+
+	std::cout << "Moved BST" << std::endl;
+
 }
 
 template<typename T>

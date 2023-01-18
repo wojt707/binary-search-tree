@@ -34,8 +34,8 @@ private:
 
 public:
 	BST();
-	// copy constructor
-	BST(const BST<T>& other);
+	BST(const BST<T>& other); // copy constructor
+	BST(BST<T>&& other); // move constructor
 	~BST();
 	void insert(T _data);
 	T findMinimum();

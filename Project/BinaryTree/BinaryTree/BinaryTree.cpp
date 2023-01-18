@@ -8,6 +8,16 @@ int main()
 	BST<int> tree;
 	tree.insert(25);
 	tree.insert(15);
+	BST<int> secondTree = tree;
+	tree.printInOrder();
+	secondTree.printInOrder();
+	BST<int> thirdTree(std::move(tree));
+	//tree.printInOrder();
+	secondTree.printInOrder();
+	thirdTree.printInOrder();
+
+	tree.insert(25);
+	tree.insert(15);
 	tree.insert(50);
 	tree.insert(10);
 	tree.insert(22);
@@ -22,7 +32,6 @@ int main()
 	tree.insert(66);
 	tree.insert(90);
 
-	BST<int> secondTree = tree;
 
 	tree.printInOrder();
 	secondTree.printInOrder();
