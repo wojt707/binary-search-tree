@@ -1,3 +1,14 @@
+/**
+ * @file Bst.cpp
+ * @author Wojciech Dolibóg
+ * @brief Binary Search Tree implementation
+ * @version 0.1
+ * @date 2023-01-19
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include <iostream>
 #include "Bst.h"
 
@@ -30,7 +41,7 @@ bool BST<T>::isNotEmpty()
 }
 
 template<typename T>
-void BST<T>::insertNode(T _data, std::unique_ptr<Node>& currentNode)
+void BST<T>::insertHelper(std::unique_ptr<Node>& currentNode, T _data)
 {
 	if (!currentNode)
 		currentNode = std::make_unique<Node>(_data);
@@ -38,12 +49,12 @@ void BST<T>::insertNode(T _data, std::unique_ptr<Node>& currentNode)
 	else if (_data < currentNode->data)
 	{
 		std::cout << "Going to left child" << std::endl;
-		insertNode(_data, currentNode->leftChild);
+		insertHelper(currentNode->leftChild, _data);
 	}
 	else if (_data > currentNode->data)
 	{
 		std::cout << "Going to right child" << std::endl;
-		insertNode(_data, currentNode->rightChild);
+		insertHelper(currentNode->rightChild, _data);
 	}
 	else
 	{
@@ -53,19 +64,19 @@ void BST<T>::insertNode(T _data, std::unique_ptr<Node>& currentNode)
 }
 
 template<typename T>
-T BST<T>::findMin(std::unique_ptr<Node>& currentNode)
+T BST<T>::findMinHelper(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode->leftChild)
-		findMin(currentNode->leftChild);
+		findMinHelper(currentNode->leftChild);
 	else
 		return currentNode->data;
 }
 
 template<typename T>
-T BST<T>::findMax(std::unique_ptr<Node>& currentNode)
+T BST<T>::findMaxHelper(std::unique_ptr<Node>& currentNode)
 {
 	if (currentNode->rightChild)
-		findMax(currentNode->rightChild);
+		findMaxHelper(currentNode->rightChild);
 	else
 		return currentNode->data;
 }
@@ -92,13 +103,13 @@ bool BST<T>::findHelper(std::unique_ptr<Node>& currentNode, T _data)
 }
 
 template<typename T>
-void BST<T>::deleteHelper(std::unique_ptr<Node>& currentNode, T _data)
+void BST<T>::removeHelper(std::unique_ptr<Node>& currentNode, T _data)
 {
 	if (_data < currentNode->data)
-		deleteHelper(currentNode->leftChild, _data);
+		removeHelper(currentNode->leftChild, _data);
 
 	else if (_data > currentNode->data)
-		deleteHelper(currentNode->rightChild, _data);
+		removeHelper(currentNode->rightChild, _data);
 
 	else {
 		if (!currentNode->leftChild && !currentNode->rightChild)
@@ -112,9 +123,9 @@ void BST<T>::deleteHelper(std::unique_ptr<Node>& currentNode, T _data)
 
 		else
 		{
-			T successor = findMin(currentNode->rightChild);
+			T successor = findMinHelper(currentNode->rightChild);
 			currentNode->data = successor;
-			deleteHelper(currentNode->rightChild, successor);
+			removeHelper(currentNode->rightChild, successor);
 		}
 	}
 }
@@ -198,14 +209,14 @@ template<typename T>
 void BST<T>::insert(T _data)
 {
 	std::cout << "Trying to insert node " << _data << std::endl;
-	insertNode(_data, root);
+	insertHelper(root, _data);
 }
 
 template<typename T>
 T BST<T>::findMinimum()
 {
 	if (isNotEmpty())
-		return findMin(root);
+		return findMinHelper(root);
 	else
 	{
 		std::cout << "Error: BST is empty";
@@ -217,7 +228,7 @@ template<typename T>
 T BST<T>::findMaximum()
 {
 	if (isNotEmpty())
-		return findMax(root);
+		return findMaxHelper(root);
 	else
 	{
 		std::cout << "Error: BST is empty";
@@ -226,7 +237,7 @@ T BST<T>::findMaximum()
 }
 
 template<typename T>
-bool BST<T>::findNode(T _data)
+bool BST<T>::find(T _data)
 {
 	if (isNotEmpty())
 		return findHelper(root, _data);
@@ -237,15 +248,15 @@ bool BST<T>::findNode(T _data)
 }
 
 template<typename T>
-void BST<T>::deleteNode(T _data)
+void BST<T>::remove(T _data)
 {
-	if (findNode(_data))
+	if (find(_data))
 	{
-		deleteHelper(root, _data);
-		std::cout << "Node " << _data << " succesfully deleted" << std::endl;
+		removeHelper(root, _data);
+		std::cout << "Node " << _data << " succesfully removed" << std::endl;
 	}
 	else
-		std::cout << _data << " is not in the tree so it cannot be deleted" << std::endl;
+		std::cout << _data << " is not in the tree so it cannot be removed" << std::endl;
 }
 
 template<typename T>

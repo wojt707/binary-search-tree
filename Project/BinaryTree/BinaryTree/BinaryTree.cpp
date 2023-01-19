@@ -5,40 +5,32 @@
 
 int main()
 {
+	int treeValues[] = { 25, 15, 50, 10, 22, 35, 70, 4, 12, 18, 24, 31, 44, 66, 90 };
+
 	BST<int> tree;
-	tree.insert(25);
-	tree.insert(15);
-	BST<int> secondTree = tree;
+	for (int i = 0; i < 15; i++)
+		tree.insert(treeValues[i]);
+
 	tree.printInOrder();
-	secondTree.printInOrder();
-	BST<int> thirdTree(std::move(tree));
-	//tree.printInOrder();
-	secondTree.printInOrder();
-	thirdTree.printInOrder();
+	tree.printPostOrder();
+	tree.printPreOrder();
+	tree.remove(19);
+	tree.remove(35);
 
-	secondTree.insert(25);
-	secondTree.insert(15);
-	secondTree.insert(50);
-	secondTree.insert(10);
-	secondTree.insert(22);
-	secondTree.insert(35);
-	secondTree.insert(70);
-	secondTree.insert(4);
-	secondTree.insert(12);
-	secondTree.insert(18);
-	secondTree.insert(24);
-	secondTree.insert(31);
-	secondTree.insert(44);
-	secondTree.insert(66);
-	secondTree.insert(90);
+	std::cout << "Minimum " << tree.findMinimum() << std::endl;
+	std::cout << "Maximum " << tree.findMaximum() << std::endl;
+	auto c = (tree.find(35)) ? "35 found" : "35 not found";
+	std::cout << c << std::endl;
 
-
-	secondTree.printInOrder();
-	thirdTree.printInOrder();
-
-	//BST<double> doubleBST;
-	//doubleBST.insert(23.5);
-
+	BST<int> tree2(tree);
+	tree.printInOrder();
+	tree2.printInOrder();
+	BST<int> tree3(std::move(tree2));
+	tree.printInOrder();
+	tree2.printInOrder();
+	tree3.printInOrder();
+	tree.erase();
+	tree.printInOrder();
 
 	return 0;
 }
