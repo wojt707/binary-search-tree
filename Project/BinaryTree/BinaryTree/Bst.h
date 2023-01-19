@@ -18,15 +18,17 @@ private:
 	};
 	std::unique_ptr<Node> root;
 
-	std::unique_ptr<Node> createNode(T _data);
 	std::unique_ptr<Node> copyHelper(const std::unique_ptr<Node>& other);
 	bool isNotEmpty();
 	void insertNode(T _data, std::unique_ptr<Node>& currentNode);
+
 	T findMin(std::unique_ptr<Node>& currentNode);
 	T findMax(std::unique_ptr<Node>& currentNode);
-	bool findPrivate(std::unique_ptr<Node>& currentNode, T _data);
-	void deletePrivate(std::unique_ptr<Node>& currentNode, T _data);
-	void erasePrivate(std::unique_ptr<Node>& currentNode);
+	bool findHelper(std::unique_ptr<Node>& currentNode, T _data);
+
+	void deleteHelper(std::unique_ptr<Node>& currentNode, T _data);
+	void eraseHelper(std::unique_ptr<Node>& currentNode);
+
 	void inOrder(const std::unique_ptr<Node>& currentNode);
 	void preOrder(const std::unique_ptr<Node>& currentNode);
 	void postOrder(const std::unique_ptr<Node>& currentNode);
