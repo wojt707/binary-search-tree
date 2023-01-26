@@ -1,5 +1,3 @@
-// BinaryTree.cpp : This file contains the 'main' function. Program execution begins and ends there.
-
 #include <iostream>
 #include "Bst.h"
 
@@ -27,7 +25,7 @@ int main()
 	tree2.printInOrder();
 	BST<int> tree3(std::move(tree2));
 	tree.printInOrder();
-	tree2.printInOrder();
+	//tree2.printInOrder(); // <------- Warning: Use of a moved from object : ''tree2'' (lifetime.1)
 	tree3.printInOrder();
 	tree.erase();
 	tree.printInOrder();

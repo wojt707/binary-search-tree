@@ -27,17 +27,10 @@ std::unique_ptr<typename BST<T>::Node> BST<T>::copyHelper(const std::unique_ptr<
 	else
 	{
 		std::unique_ptr<Node> newNode = std::make_unique<Node>(other->data);
-		std::cout << "Copied node " << newNode->data << std::endl;
 		newNode->leftChild = copyHelper(other->leftChild);
 		newNode->rightChild = copyHelper(other->rightChild);
 		return newNode;
 	}
-}
-
-template<typename T>
-bool BST<T>::isNotEmpty()
-{
-	return (root) ? true : false;
 }
 
 template<typename T>
@@ -47,20 +40,10 @@ void BST<T>::insertHelper(std::unique_ptr<Node>& currentNode, T _data)
 		currentNode = std::make_unique<Node>(_data);
 
 	else if (_data < currentNode->data)
-	{
-		std::cout << "Going to left child" << std::endl;
 		insertHelper(currentNode->leftChild, _data);
-	}
-	else if (_data > currentNode->data)
-	{
-		std::cout << "Going to right child" << std::endl;
-		insertHelper(currentNode->rightChild, _data);
-	}
-	else
-	{
-		std::cout << "The node " << _data << " has already been added to the tree" << std::endl;
-	}
 
+	else if (_data > currentNode->data)
+		insertHelper(currentNode->rightChild, _data);
 }
 
 template<typename T>
@@ -84,22 +67,17 @@ T BST<T>::findMaxHelper(std::unique_ptr<Node>& currentNode)
 template<typename T>
 bool BST<T>::findHelper(std::unique_ptr<Node>& currentNode, T _data)
 {
-	if (!currentNode) {
-		std::cout << "Node " << _data << " not found" << std::endl;
+	if (!currentNode)
 		return false;
-	}
+
 	if (_data < currentNode->data)
 		return findHelper(currentNode->leftChild, _data);
 
 	else if (_data > currentNode->data)
 		return findHelper(currentNode->rightChild, _data);
 
-	else {
-		std::cout << "Node " << _data << " succesfully found" << std::endl;
+	else
 		return true;
-	}
-
-
 }
 
 template<typename T>
@@ -178,37 +156,29 @@ template<typename T>
 BST<T>::BST()
 {
 	this->root = nullptr;
-
-	std::cout << "Created Binary search tree" << std::endl;
 }
 
 template<typename T>
 BST<T>::BST(const BST<T>& other)
 {
 	this->root = copyHelper(other.root);
-
-	std::cout << "Copied BST" << std::endl;
 }
 
 template<typename T>
 BST<T>::BST(BST<T>&& other)
 {
 	this->root = std::move(other.root);
-
-	std::cout << "Moved BST" << std::endl;
-
 }
 
 template<typename T>
-BST<T>::~BST()
+bool BST<T>::isNotEmpty()
 {
-	std::cout << "Deleted Binary search tree" << std::endl;
+	return (root) ? true : false;
 }
 
 template<typename T>
 void BST<T>::insert(T _data)
 {
-	std::cout << "Trying to insert node " << _data << std::endl;
 	insertHelper(root, _data);
 }
 
@@ -241,29 +211,21 @@ bool BST<T>::find(T _data)
 {
 	if (isNotEmpty())
 		return findHelper(root, _data);
-	else {
-		std::cout << "Tree is empty" << std::endl;
+	else
 		return false;
-	}
 }
 
 template<typename T>
 void BST<T>::remove(T _data)
 {
 	if (find(_data))
-	{
 		removeHelper(root, _data);
-		std::cout << "Node " << _data << " succesfully removed" << std::endl;
-	}
-	else
-		std::cout << _data << " is not in the tree so it cannot be removed" << std::endl;
 }
 
 template<typename T>
 void BST<T>::erase()
 {
 	eraseHelper(root);
-	std::cout << "Succesfully erased whole tree" << std::endl;
 }
 
 template<typename T>
@@ -271,7 +233,7 @@ void BST<T>::printInOrder()
 {
 	if (isNotEmpty())
 	{
-		std::cout << "In-order traversal: ";
+		std::cout << "In-order traversal: " << std::endl;
 		inOrder(root);
 		std::cout << std::endl;
 	}
@@ -284,7 +246,7 @@ void BST<T>::printPreOrder()
 {
 	if (isNotEmpty())
 	{
-		std::cout << "Pre-order traversal: ";
+		std::cout << "Pre-order traversal: " << std::endl;
 		preOrder(root);
 		std::cout << std::endl;
 	}
@@ -297,7 +259,7 @@ void BST<T>::printPostOrder()
 {
 	if (isNotEmpty())
 	{
-		std::cout << "Post-order traversal: ";
+		std::cout << "Post-order traversal: " << std::endl;
 		postOrder(root);
 		std::cout << std::endl;
 	}

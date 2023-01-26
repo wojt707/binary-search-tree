@@ -59,11 +59,6 @@ private:
 	 */
 	std::unique_ptr<Node> copyHelper(const std::unique_ptr<Node>& other);
 	/**
-	 * @brief Checks if binary search tree has any nodes
-	 * @return True if has at least one node, false if binary search tree is empty
-	 */
-	bool isNotEmpty();
-	/**
 	 * @brief Helps recursively to insert data to binary search tree
 	 * @param currentNode Reference to the current node
 	 * @param _data Value that is inserted
@@ -130,9 +125,10 @@ public:
 	 */
 	BST(BST<T>&& other);
 	/**
-	 * @brief Destructor of the binary search tree
+	 * @brief Checks if binary search tree has any nodes
+	 * @return True if has at least one node, false if binary search tree is empty
 	 */
-	~BST();
+	bool isNotEmpty();
 	/**
 	 * @brief Inserts new node to the binary search tree
 	 * @param _data Value to initialize the node
